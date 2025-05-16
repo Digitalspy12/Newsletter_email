@@ -9,8 +9,48 @@ import Header from "./components/Header";
 import Index from "./pages/Index";
 import Subscribers from "./pages/Subscribers";
 import NotFound from "./pages/NotFound";
+import { useEffect } from "react";
 
 const queryClient = new QueryClient();
+
+const CursorFollower = () => {
+  useEffect(() => {
+    // Create cursor elements
+    const cursorDot = document.createElement("div");
+    cursorDot.className = "cursor-dot";
+    
+    const cursorOutline = document.createElement("div");
+    cursorOutline.className = "cursor-outline";
+    
+    document.body.appendChild(cursorDot);
+    document.body.appendChild(cursorOutline);
+    
+    // Update cursor position
+    const moveCursor = (e: MouseEvent) => {
+      const posX = e.clientX;
+      const posY = e.clientY;
+      
+      cursorDot.style.left = `${posX}px`;
+      cursorDot.style.top = `${posY}px`;
+      
+      // Add a small delay to the outline for a nice effect
+      setTimeout(() => {
+        cursorOutline.style.left = `${posX}px`;
+        cursorOutline.style.top = `${posY}px`;
+      }, 50);
+    };
+    
+    window.addEventListener("mousemove", moveCursor);
+    
+    return () => {
+      window.removeEventListener("mousemove", moveCursor);
+      document.body.removeChild(cursorDot);
+      document.body.removeChild(cursorOutline);
+    };
+  }, []);
+  
+  return null;
+};
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -19,7 +59,8 @@ const App = () => (
       <Sonner />
       <SubscriberProvider>
         <BrowserRouter>
-          <div className="min-h-screen bg-gray-50">
+          <div className="min-h-screen bg-[#1A1F2C]">
+            <CursorFollower />
             <Header />
             <main className="pt-6 pb-16">
               <Routes>

@@ -19,8 +19,8 @@ const TargetAudience = () => {
       <div className="grid md:grid-cols-2 gap-6">
         <Card className="bg-gray-900/60 border-gray-800 transform transition-all hover:translate-y-[-5px] duration-300">
           <CardContent className="p-6">
-            <h3 className="text-xl font-bold mb-4">Code Craftsmen</h3>
-            <p className="text-gray-400">
+            <h3 className="text-xl font-bold mb-4 text-emerald-400">Code Craftsmen</h3>
+            <p className="text-gray-300">
               Developers looking to master their craft, learn best practices, and stay updated with
               the latest tools and frameworks in the programming world.
             </p>
@@ -29,8 +29,8 @@ const TargetAudience = () => {
 
         <Card className="bg-gray-900/60 border-gray-800 transform transition-all hover:translate-y-[-5px] duration-300">
           <CardContent className="p-6">
-            <h3 className="text-xl font-bold mb-4">Security Enthusiasts</h3>
-            <p className="text-gray-400">
+            <h3 className="text-xl font-bold mb-4 text-emerald-400">Security Enthusiasts</h3>
+            <p className="text-gray-300">
               Those passionate about cybersecurity, ethical hacking, and understanding
               system vulnerabilities to build more secure applications.
             </p>

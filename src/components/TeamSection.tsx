@@ -53,8 +53,8 @@ const TeamSection = () => {
                 <AvatarFallback className="bg-gray-800 text-gray-200">{member.fallback}</AvatarFallback>
               </Avatar>
               <div>
-                <h3 className="text-xl font-bold">{member.name}</h3>
-                <p className="text-[#4338ca]">{member.role}</p>
+                <h3 className="text-xl font-bold text-emerald-300">{member.name}</h3>
+                <p className="text-blue-400">{member.role}</p>
               </div>
             </CardContent>
           </Card>
