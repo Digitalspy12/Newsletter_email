@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import { validateEmail } from "../utils/validation";
 import { useSubscribers } from "../context/SubscriberContext";
+import { Input } from "./ui/input";
+import { Button } from "./ui/button";
 
 interface SignupFormProps {
   onSuccess: () => void;
@@ -43,27 +45,27 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSuccess }) => {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto p-6 bg-white rounded-lg shadow-md animate-fade-in">
-      <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
+    <div className="w-full max-w-md mx-auto p-6 bg-white rounded-lg shadow-md animate-fade-in backdrop-blur-sm bg-white/90">
+      <h2 className="text-2xl font-bold mb-6 text-center text-gray-800 font-serif transform transition-all hover:scale-105 duration-300">
         Subscribe to our Newsletter
       </h2>
       
       <form onSubmit={handleSubmit} className="space-y-4" noValidate>
-        <div className="space-y-2">
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+        <div className="space-y-2 transition-all duration-300 hover:translate-y-[-2px]">
+          <label htmlFor="email" className="block text-sm font-medium text-gray-700 font-serif">
             Email Address
           </label>
-          <input
+          <Input
             type="email"
             id="email"
             value={email}
             onChange={handleEmailChange}
             placeholder="your@email.com"
-            className={`w-full px-4 py-3 rounded-md border ${
+            className={`w-full px-4 py-3 rounded-md border transition-all duration-300 ${
               emailError 
                 ? "border-red-500 focus:ring-red-200" 
                 : "border-gray-300 focus:ring-newsletter-light"
-            } focus:outline-none focus:ring-4 transition-all`}
+            } focus:outline-none focus:ring-4 focus:scale-[1.02] hover:border-newsletter`}
             disabled={isSubmitting}
             aria-invalid={!!emailError}
             aria-describedby={emailError ? "email-error" : undefined}
@@ -80,15 +82,15 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSuccess }) => {
           )}
         </div>
         
-        <button
+        <Button
           type="submit"
           disabled={!isValidEmail || isSubmitting}
-          className={`w-full py-3 px-6 rounded-md font-medium text-white transition-all duration-200 ${
+          className={`w-full py-3 px-6 rounded-md font-medium text-white transition-all duration-300 transform hover:scale-105 active:scale-95 ${
             !isValidEmail 
               ? "bg-gray-400 cursor-not-allowed" 
               : isSubmitting 
                 ? "bg-newsletter opacity-80 cursor-wait" 
-                : "bg-newsletter hover:bg-newsletter-hover active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-newsletter-light"
+                : "bg-newsletter hover:bg-newsletter-hover hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-newsletter-light"
           }`}
         >
           {isSubmitting ? (
@@ -100,7 +102,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSuccess }) => {
               Processing...
             </span>
           ) : "Sign Up"}
-        </button>
+        </Button>
       </form>
     </div>
   );
