@@ -44,11 +44,11 @@ const Testimonials = () => {
   return (
     <section className="space-y-8">
       <div className="text-center space-y-4">
-        <div className="inline-block bg-gray-800 px-4 py-1 rounded-full text-xs uppercase tracking-wider text-gray-300">
-          Testimonials
+        <div className="inline-block bg-gray-800 px-4 py-1 rounded-full text-xs uppercase tracking-wider text-green-400">
+          User_Feedback
         </div>
-        <h2 className="text-3xl font-bold">What Our Subscribers Say</h2>
-        <p className="text-gray-400 max-w-2xl mx-auto">
+        <h2 className="text-3xl font-bold glitch-text">What Our Subscribers Say</h2>
+        <p className="text-green-300 max-w-2xl mx-auto font-mono">
           We receive hundreds of messages every month from developers who have found value in our newsletter.
         </p>
       </div>
@@ -57,26 +57,32 @@ const Testimonials = () => {
         <CarouselContent>
           {testimonials.map((testimonial) => (
             <CarouselItem key={testimonial.id} className="md:basis-1/2 lg:basis-1/3">
-              <Card className="h-full bg-gray-900/60 border-gray-800">
+              <Card className="h-full terminal-window">
+                <div className="terminal-header">
+                  <span className="terminal-circle red"></span>
+                  <span className="terminal-circle yellow"></span>
+                  <span className="terminal-circle green"></span>
+                  <span className="ml-2 text-green-400 text-sm">testimonial_{testimonial.id}.log</span>
+                </div>
                 <CardContent className="p-6 flex flex-col justify-between h-full space-y-6">
                   <div>
-                    <p className="text-sm text-gray-500 mb-2">{testimonial.date}</p>
-                    <p className="text-gray-300">"{testimonial.content}"</p>
+                    <p className="text-sm text-green-400 mb-2 font-mono"># {testimonial.date}</p>
+                    <p className="text-green-300 font-mono">"{testimonial.content}"</p>
                   </div>
                   <div className="flex items-center mt-4">
-                    <Avatar className="h-10 w-10 mr-3">
+                    <Avatar className="h-10 w-10 mr-3 border border-green-700">
                       <AvatarImage src={testimonial.avatar} alt={testimonial.author} />
-                      <AvatarFallback className="bg-gray-800 text-gray-200">{testimonial.fallback}</AvatarFallback>
+                      <AvatarFallback className="bg-gray-800 text-green-400">{testimonial.fallback}</AvatarFallback>
                     </Avatar>
-                    <span className="text-sm font-medium">{testimonial.author}</span>
+                    <span className="text-sm font-medium text-green-400 terminal-cursor">{testimonial.author}</span>
                   </div>
                 </CardContent>
               </Card>
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious className="left-1" />
-        <CarouselNext className="right-1" />
+        <CarouselPrevious className="left-1 text-green-400 border-green-400 hover:bg-green-900/20" />
+        <CarouselNext className="right-1 text-green-400 border-green-400 hover:bg-green-900/20" />
       </Carousel>
     </section>
   );

@@ -6,25 +6,25 @@ const Header: React.FC = () => {
   const location = useLocation();
 
   return (
-    <header className="w-full bg-white shadow-sm px-4 py-4">
+    <header className="w-full bg-[#0b1015] shadow-sm px-4 py-4 border-b border-green-800/30">
       <div className="container mx-auto flex justify-between items-center">
-        <div className="font-bold text-xl text-newsletter">Newsletter App</div>
+        <div className="font-bold text-xl text-green-500 font-mono">console.log(<span className="text-green-300">"Newsletter"</span>)</div>
         <nav className="flex gap-6">
           <Link 
             to="/" 
-            className={`transition-colors duration-200 hover:text-newsletter ${
-              location.pathname === "/" ? "text-newsletter font-medium" : "text-gray-600"
+            className={`transition-colors duration-200 hover:text-green-400 font-mono ${
+              location.pathname === "/" ? "text-green-400 font-medium" : "text-green-700"
             }`}
           >
-            Sign Up
+            sign_up.sh
           </Link>
           <Link 
             to="/subscribers" 
-            className={`transition-colors duration-200 hover:text-newsletter ${
-              location.pathname === "/subscribers" ? "text-newsletter font-medium" : "text-gray-600"
+            className={`transition-colors duration-200 hover:text-green-400 font-mono ${
+              location.pathname === "/subscribers" ? "text-green-400 font-medium" : "text-green-700"
             }`}
           >
-            Subscribers
+            subscribers.sh
           </Link>
         </nav>
       </div>

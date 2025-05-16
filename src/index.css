@@ -87,42 +87,94 @@
 @layer base {
   * {
     @apply border-border;
+    font-family: 'Roboto Mono', monospace;
   }
 
   body {
     @apply bg-background text-foreground;
-    background: #1A1F2C; /* More polished black background */
+    background: #0e1419; /* Terminal-style dark background */
+    color: #5ff04f; /* Terminal green text */
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Roboto Mono', monospace;
+    letter-spacing: -0.5px;
   }
   
   /* Add a nice code style for the developer audience */
   code {
-    @apply bg-gray-800 text-gray-200 px-1.5 py-0.5 rounded text-sm font-mono;
+    @apply bg-gray-900 text-green-400 px-1.5 py-0.5 rounded text-sm font-mono;
+    border: 1px solid #2c3e50;
   }
   
-  /* Cursor follower styles */
+  /* Bug cursor follower styles */
   .cursor-dot {
     position: fixed;
-    width: 8px;
-    height: 8px;
-    background-color: rgba(255, 255, 255, 0.8);
+    width: 10px;
+    height: 10px;
+    background-color: #5ff04f;
     border-radius: 50%;
     pointer-events: none;
     z-index: 9999;
     transition: transform 0.1s ease;
     transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px #5ff04f;
   }
   
   .cursor-outline {
     position: fixed;
-    width: 30px;
-    height: 30px;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
+    width: 25px;
+    height: 20px;
+    border: 2px solid rgba(95, 240, 79, 0.4);
+    border-radius: 50% 50% 0 50%;
     pointer-events: none;
     z-index: 9998;
     transition: transform 0.15s ease, width 0.2s ease, height 0.2s ease;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) rotate(45deg);
   }
+  
+  /* Add blinking terminal cursor effect */
+  .terminal-cursor::after {
+    content: '|';
+    animation: blink 1s step-start infinite;
+    margin-left: 2px;
+  }
+  
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+  
+  /* Terminal window styling */
+  .terminal-window {
+    border: 1px solid #2c3e50;
+    border-radius: 6px;
+    background-color: #0e1419;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .terminal-header {
+    background-color: #1e2a38;
+    padding: 8px 16px;
+    border-bottom: 1px solid #2c3e50;
+    display: flex;
+    align-items: center;
+  }
+  
+  .terminal-circle {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 6px;
+    display: inline-block;
+  }
+  
+  .red { background-color: #ff5f57; }
+  .yellow { background-color: #febc2e; }
+  .green { background-color: #28c840; }
 }
 
 /* Custom animations */
@@ -141,5 +193,57 @@
     100% {
       transform: translateY(0px);
     }
+  }
+  
+  /* Glitch text effect */
+  .glitch-text {
+    position: relative;
+    animation: glitch 3s infinite;
+  }
+  
+  @keyframes glitch {
+    0% { text-shadow: 0.05em 0 0 rgba(255,0,0,0.75), -0.05em -0.025em 0 rgba(0,255,0,0.75), -0.025em 0.05em 0 rgba(0,0,255,0.75); }
+    14% { text-shadow: 0.05em 0 0 rgba(255,0,0,0.75), -0.05em -0.025em 0 rgba(0,255,0,0.75), -0.025em 0.05em 0 rgba(0,0,255,0.75); }
+    15% { text-shadow: -0.05em -0.025em 0 rgba(255,0,0,0.75), 0.025em 0.025em 0 rgba(0,255,0,0.75), -0.05em -0.05em 0 rgba(0,0,255,0.75); }
+    49% { text-shadow: -0.05em -0.025em 0 rgba(255,0,0,0.75), 0.025em 0.025em 0 rgba(0,255,0,0.75), -0.05em -0.05em 0 rgba(0,0,255,0.75); }
+    50% { text-shadow: 0.025em 0.05em 0 rgba(255,0,0,0.75), 0.05em 0 0 rgba(0,255,0,0.75), 0 -0.05em 0 rgba(0,0,255,0.75); }
+    99% { text-shadow: 0.025em 0.05em 0 rgba(255,0,0,0.75), 0.05em 0 0 rgba(0,255,0,0.75), 0 -0.05em 0 rgba(0,0,255,0.75); }
+    100% { text-shadow: -0.025em 0 0 rgba(255,0,0,0.75), -0.025em -0.025em 0 rgba(0,255,0,0.75), -0.025em -0.05em 0 rgba(0,0,255,0.75); }
+  }
+  
+  .scanline {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      to bottom,
+      transparent 50%,
+      rgba(0, 0, 0, 0.05) 50%
+    );
+    background-size: 100% 4px;
+    z-index: 2;
+    pointer-events: none;
+  }
+  
+  .typing {
+    border-right: 0.1em solid #5ff04f;
+    width: max-content;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: 
+      typing 3.5s steps(40, end),
+      blink-caret 0.75s step-end infinite;
+  }
+  
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+  
+  @keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: #5ff04f }
   }
 }

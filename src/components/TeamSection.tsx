@@ -32,11 +32,11 @@ const TeamSection = () => {
   return (
     <section className="space-y-8">
       <div className="text-center space-y-4">
-        <div className="inline-block bg-gray-800 px-4 py-1 rounded-full text-xs uppercase tracking-wider text-gray-300">
-          The Team
+        <div className="inline-block bg-gray-800 px-4 py-1 rounded-full text-xs uppercase tracking-wider text-green-400">
+          The_Team
         </div>
-        <h2 className="text-3xl font-bold">Meet The Team</h2>
-        <p className="text-gray-400 max-w-2xl mx-auto">
+        <h2 className="text-3xl font-bold glitch-text">Meet The Team</h2>
+        <p className="text-green-300 max-w-2xl mx-auto font-mono">
           We're a team of {teamMembers.length} experts providing valuable insights and cutting-edge techniques in development and security.
         </p>
       </div>
@@ -45,16 +45,22 @@ const TeamSection = () => {
         {teamMembers.map((member) => (
           <Card 
             key={member.id} 
-            className="bg-gray-900/60 border-gray-800 transform transition-all hover:translate-y-[-5px] duration-300"
+            className="terminal-window transform transition-all hover:translate-y-[-5px] duration-300"
           >
+            <div className="terminal-header">
+              <span className="terminal-circle red"></span>
+              <span className="terminal-circle yellow"></span>
+              <span className="terminal-circle green"></span>
+              <span className="ml-2 text-green-400 text-sm">~/{member.name.toLowerCase().replace(" ", "_")}</span>
+            </div>
             <CardContent className="p-6 flex flex-col items-center text-center space-y-4">
-              <Avatar className="h-24 w-24 border-2 border-gray-700">
+              <Avatar className="h-24 w-24 border-2 border-green-700">
                 <AvatarImage src={member.avatar} alt={member.name} />
-                <AvatarFallback className="bg-gray-800 text-gray-200">{member.fallback}</AvatarFallback>
+                <AvatarFallback className="bg-gray-800 text-green-400">{member.fallback}</AvatarFallback>
               </Avatar>
               <div>
-                <h3 className="text-xl font-bold text-emerald-300">{member.name}</h3>
-                <p className="text-blue-400">{member.role}</p>
+                <h3 className="text-xl font-bold text-green-400 terminal-cursor">{member.name}</h3>
+                <p className="text-green-300 font-mono">{member.role}</p>
               </div>
             </CardContent>
           </Card>

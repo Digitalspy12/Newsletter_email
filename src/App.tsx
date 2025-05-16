@@ -33,10 +33,18 @@ const CursorFollower = () => {
       cursorDot.style.left = `${posX}px`;
       cursorDot.style.top = `${posY}px`;
       
-      // Add a small delay to the outline for a nice effect
+      // Bug-like movement for cursor outline
       setTimeout(() => {
-        cursorOutline.style.left = `${posX}px`;
-        cursorOutline.style.top = `${posY}px`;
+        // Add slight random movement to make it feel like a bug
+        const randomX = Math.random() * 3 - 1.5;
+        const randomY = Math.random() * 3 - 1.5;
+        
+        cursorOutline.style.left = `${posX + randomX}px`;
+        cursorOutline.style.top = `${posY + randomY}px`;
+        
+        // Randomly rotate the "bug" as it moves
+        const rotation = Math.random() * 90 - 45;
+        cursorOutline.style.transform = `translate(-50%, -50%) rotate(${rotation}deg)`;
       }, 50);
     };
     
@@ -59,7 +67,7 @@ const App = () => (
       <Sonner />
       <SubscriberProvider>
         <BrowserRouter>
-          <div className="min-h-screen bg-[#1A1F2C]">
+          <div className="min-h-screen bg-[#0e1419]">
             <CursorFollower />
             <Header />
             <main className="pt-6 pb-16">
@@ -69,6 +77,7 @@ const App = () => (
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
+            <div className="scanline" aria-hidden="true"></div>
           </div>
         </BrowserRouter>
       </SubscriberProvider>
