@@ -1,11 +1,27 @@
-// Update this page (the content is just a fallback if you fail to update the page)
 
-const Index = () => {
+import React, { useState } from "react";
+import SignupForm from "../components/SignupForm";
+import ConfirmationMessage from "../components/ConfirmationMessage";
+
+const Index: React.FC = () => {
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleSubmitSuccess = () => {
+    setIsSubmitted(true);
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
+    <div className="container mx-auto px-4 py-12">
+      <div className="max-w-xl mx-auto">
+        <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">
+          Join Our Newsletter
+        </h1>
+        
+        {isSubmitted ? (
+          <ConfirmationMessage />
+        ) : (
+          <SignupForm onSuccess={handleSubmitSuccess} />
+        )}
       </div>
     </div>
   );
